@@ -13,6 +13,7 @@ import android.util.JsonWriter;
 
 import com.termux.api.util.ResultReturner;
 import com.termux.api.util.TermuxApiLogger;
+import io.github.pixee.security.BoundedLineReader;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -166,7 +167,7 @@ public class TextToSpeechAPI {
 
                         try (BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
                             String line;
-                            while ((line = reader.readLine()) != null) {
+                            while ((line = BoundedLineReader.readLine(reader, 5_000_000)) != null) {
                                 if (!line.isEmpty()) {
                                     submittedUtterances++;
                                     mTts.speak(line, TextToSpeech.QUEUE_ADD, params, utteranceId);
