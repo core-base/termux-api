@@ -80,7 +80,7 @@ public class DialogActivity extends AppCompatActivity {
                         props.load(new InputStreamReader(in, StandardCharsets.UTF_8));
                     }
                 }
-                mUseBlackUi = props.getProperty("use-black-ui").equals("true");
+                mUseBlackUi = "true".equals(props.getProperty("use-black-ui"));
             } catch (Exception e) {
                 Log.e("termux-api", "Error loading props", e);
             }
@@ -168,7 +168,7 @@ public class DialogActivity extends AppCompatActivity {
                     }
                     out.endArray();
                 }
-                if (!result.error.equals("")) {
+                if (!"".equals(result.error)) {
                     out.name("error").value(result.error);
                 }
 
@@ -703,7 +703,7 @@ public class DialogActivity extends AppCompatActivity {
             for (final ActivityManager.RunningAppProcessInfo processInfo : runningProcesses) {
                 if (processInfo.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND) {
                     for (final String activeProcess : processInfo.pkgList) {
-                        if (activeProcess.equals("com.termux")) {
+                        if ("com.termux".equals(activeProcess)) {
                             return true;
                         }
                     }

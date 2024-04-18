@@ -192,7 +192,7 @@ public class NfcActivity extends AppCompatActivity{
         boolean bNdefPresent = false;
         String strs[] = tag.getTechList();
         for (String s: strs){
-            if (s.equals("android.nfc.tech.Ndef"))
+            if ("android.nfc.tech.Ndef".equals(s))
                 bNdefPresent = true;
         }
         if (!bNdefPresent){
@@ -236,7 +236,7 @@ public class NfcActivity extends AppCompatActivity{
         String strs[] = tag.getTechList();
         boolean bNdefPresent = false;
         for (String s: strs){
-            if (s.equals("android.nfc.tech.Ndef"))
+            if ("android.nfc.tech.Ndef".equals(s))
                 bNdefPresent = true;
         }
         if (!bNdefPresent){
