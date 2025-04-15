@@ -11,6 +11,8 @@ import android.os.IBinder;
 
 import com.termux.api.util.ResultReturner;
 import com.termux.api.util.TermuxApiLogger;
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -90,7 +92,7 @@ public class WallpaperAPI {
                 if (!contentUrl.startsWith("http://") && !contentUrl.startsWith("https://")) {
                     contentUrl = "http://" + url;
                 }
-                HttpURLConnection connection = (HttpURLConnection) new URL(contentUrl).openConnection();
+                HttpURLConnection connection = (HttpURLConnection) Urls.create(contentUrl, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS).openConnection();
                 connection.connect();
 
                 String contentType = "" + connection.getHeaderField("Content-Type");
